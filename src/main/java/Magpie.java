@@ -31,9 +31,10 @@ public class Magpie
     public String getResponse(String statement)
     {
         String response = "";
+        String str2 = statement.trim();
         if (statement.indexOf("no") >= 0)
         {
-            response = "Why so negative?";
+            response = "Why so negative? Be Positive!!";
         }
         else if (statement.indexOf("mother") >= 0
                 || statement.indexOf("father") >= 0
@@ -56,7 +57,38 @@ public class Magpie
         {
            response = "She sounds like a good teacher.";
         }
-        //else if ()
+        else if (str2.equals("")){
+            response = "Say something, please. ";
+        }
+        else if (statement.indexOf("tired") >= 0)
+        {
+            response = "Take a rest!";
+        }
+        else if (statement.indexOf("school") >= 0)
+        {
+            response = "Yeah school is tough, sorry for you...";
+        }
+        else if (statement.indexOf("math") >= 0)
+        {
+            response = "Oh do you like math? Wonderful!";
+        }
+        else if (statement.indexOf("I want to") >= 0)
+        {
+            System.out.println(transformIWantToStatement(statement));
+        }
+        else if (statement.indexOf("I want") >= 0)
+        {
+            System.out.println(transformIWantStatement(statement));
+        }
+        
+        else if (statement.indexOf("I like you") >= 0)
+        {
+            System.out.println(transformIYouStatement(statement));
+        }
+        else if (statement.indexOf("Do you like me?") >= 0)
+        {
+            System.out.println(transformYouMeStatement(statement));
+        }
         else
         {
             response = getRandomResponse();
@@ -70,7 +102,7 @@ public class Magpie
      */
     public String getRandomResponse()
     {
-        final int NUMBER_OF_RESPONSES = 4;
+        final int NUMBER_OF_RESPONSES = 6;
         double r = Math.random();
         int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
         String response = "";
@@ -91,6 +123,14 @@ public class Magpie
         {
             response = "You don't say.";
         }
+        else if (whichResponse == 4)
+        {
+            response = "That's cool.";
+        }
+        else if (whichResponse == 5)
+        {
+            response = "Hm I see.";
+        }
     
         return response;
     }
@@ -105,8 +145,11 @@ public class Magpie
     // The method returns the index of the first character in word
     // if it is found, and returns -1 otherwise. 
     public int findWord(String str, String word) {
-        return -1;
-    }
+    str = " " + str.toLowerCase() + " ";
+    word = " " + word.toLowerCase() + " ";
+
+    return str.indexOf(word);
+}
 
     
     // We will work on the following methods later!
@@ -119,8 +162,12 @@ public class Magpie
      */
     public String transformIWantStatement(String statement)
     {
-        //your code here
-        return "";
+        String str1 = "";
+        if (statement.indexOf("I want") >= 0)
+        {
+            str1 = statement.substring(7);
+        }
+        return "Would you really be happy if you had "+ str1 + "?";
     }
 
     /**
@@ -131,10 +178,14 @@ public class Magpie
      */
     public String transformIYouStatement(String statement)
     {
-        //your code here
-        return "";
+        if (statement.indexOf("I like you") >= 0)
+        {
+           return "Why do you like me?";
+        }
+        else{
+            return "";
+        }
     }
-
     /**
      * Take a statement with "I want to <something>." and transform it into 
      * "What would it mean to <something>?"
@@ -143,8 +194,12 @@ public class Magpie
      */
     public String transformIWantToStatement(String statement)
     {
-        // your code here
-        return "";
+        String str1 = "";
+        if (statement.indexOf("I want to") >= 0)
+        {
+            str1 = statement.substring(9);
+        }
+        return "What would it mean to"+ str1 + "?";
     }
 
 
@@ -158,7 +213,12 @@ public class Magpie
      */
     public String transformYouMeStatement(String statement)
     {
-        // your code here
-        return "";
+        if (statement.indexOf("Do you like me?") >= 0)
+        {
+           return "What makes you think that I like you?";
+        }
+        else{
+            return "";
+        }
     }
 }
